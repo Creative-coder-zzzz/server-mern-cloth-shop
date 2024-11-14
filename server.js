@@ -7,6 +7,7 @@ import adminProductsRouter from '../server/routes/admin/products-routes.js'
 import shopProductRouter from './routes/shop/product-routes.js'
 import shopCartRouter from './routes/shop/cart-routes.js'
 import shopAddressRouter from './routes/shop/address-routes.js'
+import shopOrdersRouter from './routes/shop/Order-routes.js'
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -32,6 +33,7 @@ app.use('/api/admin/products', adminProductsRouter)
 app.use('/api/shop/products', shopProductRouter)
 app.use('/api/shop/cart', shopCartRouter)
 app.use('/api/shop/address', shopAddressRouter)
+app.use('/api/shop/orders', shopOrdersRouter)
 mongoose.connect('mongodb+srv://sandesh:sandyshades2003@cluster0.ptb0h.mongodb.net/')
   .then(() => console.log('MongoDB connection successful'))
   .catch((error) => console.log('MongoDB connection error:', error));
