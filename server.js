@@ -25,6 +25,14 @@ app.use(
     credentials: true
   })
 );
+// coop cors origin opener policy 
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp"); // Optional for stricter settings
+  next();
+});
+
+
 
 app.use(cookieParser());
 app.use(express.json());  // Call express.json as a function

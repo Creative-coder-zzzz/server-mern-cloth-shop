@@ -1,7 +1,7 @@
 
 
 import express from 'express' 
-import {authMiddleware, loginUser, logout, registerUser} from '../../controllers/auth/authController.js'
+import {authMiddleware, googleLogin, loginUser, logout, registerUser} from '../../controllers/auth/authController.js'
 const router = express.Router();
 
 router.post('/register', registerUser);
@@ -15,4 +15,6 @@ router.get('/check-auth', authMiddleware, (req,res)=>{
     user
   })
 })
+
+router.post('/googleLogin', googleLogin)
 export default router;

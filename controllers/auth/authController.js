@@ -1,6 +1,11 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import {User} from '../../models/User.js'
+import {OAuth2Client} from 'google-auth-library'
+
+//google auth 2 client 
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 //register
 const registerUser = async(req,res)=> {
@@ -84,6 +89,60 @@ const loginUser = async(req,res)=> {
 }
 
 
+//google login 
+
+  const googleLogin = async (req, res) => {
+    const { idToken } = req.body;
+
+    console.log('token id ', idToken);
+    
+    
+    try {
+      // Verifying Google token
+      const ticket = await client.verifyIdToken({
+        idToken: idToken,
+        audience: process.env.GOOGLE_CLIENT_ID,  // Make sure the client ID is correct
+      });
+  
+      const { email, name, sub } = ticket.getPayload();
+  
+      // Check if user exists in the database
+      let user = await User.findOne({ email });
+  
+      if (!user) {
+        // If user does not exist, create a new user
+        user = new User({
+          userName: name,
+          email: email,
+          password: sub,  
+          role: 'user',
+        });
+        await user.save();
+      }
+  
+      // Generate JWT token for the user
+      const token = jwt.sign(
+        { id: user._id, role: user.role || 'user', email: user.email },
+       ' CLIENT_SECRET_KEY',  // Make sure to set this in your environment
+        { expiresIn: '60m' }
+      );
+  
+      // Send response with JWT token
+      res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' }).json({
+        success: true,
+        message: 'Logged in with Google successfully',
+        user: {
+          email: user.email,
+          role: user.role || 'user',
+          id: user._id,
+          userName: user.userName,
+        }
+      });
+    } catch (error) {
+      console.log("Google login error:", error);
+      res.status(500).json({ success: false, message: 'Google login failed' });
+    }
+  };
 //logout
 
 const logout = (req,res)=>{
@@ -116,4 +175,4 @@ const authMiddleware = async(req,res,next) => {
   }
 }
 
-export  {registerUser, loginUser, logout, authMiddleware};
+export  {registerUser, loginUser, logout, authMiddleware, googleLogin};
