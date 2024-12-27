@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import authRouter from './routes/auth/auth-routes.js'
-import adminProductsRouter from '../server/routes/admin/products-routes.js'
+import adminProductsRouter from './routes/admin/products-routes.js'
 import shopProductRouter from './routes/shop/product-routes.js'
 import shopCartRouter from './routes/shop/cart-routes.js'
 import shopAddressRouter from './routes/shop/address-routes.js'
