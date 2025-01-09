@@ -13,7 +13,7 @@ const port = process.env.PORT || 7701;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://mern-cloth-shop-e-commerce-site.vercel.app",
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: [
       'Content-Type',
