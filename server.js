@@ -9,7 +9,7 @@ import shopCartRouter from './routes/shop/cart-routes.js'
 import shopAddressRouter from './routes/shop/address-routes.js'
 import shopOrdersRouter from './routes/shop/Order-routes.js'
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7701;
 
 app.use(
   cors({
