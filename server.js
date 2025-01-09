@@ -26,8 +26,9 @@ app.use(
         callback(new Error('CORS policy error'), false);
       }
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // if you need to send cookies or authentication headers
   })
 );
 // coop cors origin opener policy 
