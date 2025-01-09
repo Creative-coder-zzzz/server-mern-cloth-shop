@@ -11,18 +11,23 @@ import shopOrdersRouter from './routes/shop/Order-routes.js'
 const app = express();
 const port = process.env.PORT || 7701;
 
+const allowedOrigins = [
+  'https://mern-cloth-shop-e-commerce-site.vercel.app', // previous front-end URL
+  'https://mern-cloth-shop-e-commerce-site-i65inq1e8.vercel.app', // your current front-end URL
+];
+
+// Enable CORS with the allowed origins
 app.use(
   cors({
-    origin: "https://mern-cloth-shop-e-commerce-site.vercel.app",
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'Cache-Control',
-      'Expires',
-      'Pragma'
-    ],
-    credentials: true
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS policy error'), false);
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 // coop cors origin opener policy 
