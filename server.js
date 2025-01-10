@@ -12,8 +12,8 @@ const app = express();
 const port = process.env.PORT || 7701;
 
 const allowedOrigins = [
-  'https://mern-cloth-shop-e-commerce-site.vercel.app', // previous front-end URL
-  'https://mern-cloth-shop-e-commerce-site-i65inq1e8.vercel.app',
+  'https://vercel.com/creative-coder-zzzzs-projects/the-urban-wave/C8hoG7yxxSAn4hLh1WF4vvv93HXj',
+  'https://the-urban-wave.vercel.app',
   'http://localhost:5173'// your current front-end URL
 ];
 
