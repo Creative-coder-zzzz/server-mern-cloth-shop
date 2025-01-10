@@ -13,7 +13,8 @@ const port = process.env.PORT || 7701;
 
 const allowedOrigins = [
   'https://mern-cloth-shop-e-commerce-site.vercel.app', // previous front-end URL
-  'https://mern-cloth-shop-e-commerce-site-i65inq1e8.vercel.app', // your current front-end URL
+  'https://mern-cloth-shop-e-commerce-site-i65inq1e8.vercel.app',
+  'http://http://localhost:5173'// your current front-end URL
 ];
 
 // Enable CORS with the allowed origins
