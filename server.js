@@ -12,7 +12,7 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 7701;
+const port = process.env.PORT || 10000;
 
 const allowedOrigins = [
   'https://vercel.com/creative-coder-zzzzs-projects/the-urban-wave/C8hoG7yxxSAn4hLh1WF4vvv93HXj',
