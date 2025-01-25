@@ -7,7 +7,6 @@ const AddressSchema = new mongoose.Schema ( {
   pincode: String,
   phone: {
     type: String,
-    unique: true
   },
   notes: String
 }, {timestamps : true})

@@ -8,12 +8,15 @@ import shopProductRouter from './routes/shop/product-routes.js'
 import shopCartRouter from './routes/shop/cart-routes.js'
 import shopAddressRouter from './routes/shop/address-routes.js'
 import shopOrdersRouter from './routes/shop/Order-routes.js'
+import * as dotenv from 'dotenv'
+dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "https://mern-cloth-shop-e-commerce-site.vercel.app",
+    origin: "http://localhost:5173",
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: [
       'Content-Type',
