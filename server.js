@@ -12,20 +12,27 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7701;
 
+const allowedOrigins = [
+  'https://vercel.com/creative-coder-zzzzs-projects/the-urban-wave/C8hoG7yxxSAn4hLh1WF4vvv93HXj',
+  'https://the-urban-wave.vercel.app',
+  'http://localhost:5173'// your current front-end URL
+];
+
+// Enable CORS with the allowed origins
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'Cache-Control',
-      'Expires',
-      'Pragma'
-    ],
-    credentials: true
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS policy error'), false);
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // if you need to send cookies or authentication headers
   })
 );
 // coop cors origin opener policy 
