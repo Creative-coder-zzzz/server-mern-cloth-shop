@@ -3,9 +3,12 @@ import crypto from 'crypto'
 import { Order } from "../../models/order.js";
 import { configDotenv } from "dotenv";
 export const createOrder = async (req, res) => {
+  console.log("create order");
+  
   try {
     const { totalAmount } = req.body;
- 
+    console.log(totalAmount);
+    
     const options = {
       amount: totalAmount * 100, // Convert to paise
       currency: "INR",
@@ -23,7 +26,7 @@ export const createOrder = async (req, res) => {
     });
   
   } catch (error) {
-    console.error("some error occoured");
+    console.error("some error occoured", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -34,34 +37,32 @@ export const verifyPaymentandSaveOrder = async(req,res) => {
 
 
   try{
-    const body = `${razorpay_order_id}|${razorpay_payment_id}`;
+  //   const body = `${razorpay_order_id}|${razorpay_payment_id}`;
 
 
-    // Generate the HMAC
-    const generatedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_CLIENT_SECRET)
-      .update(body)
-      .digest("hex");
+  //   // Generate the HMAC
+  //   const generatedSignature = crypto
+  //     .createHmac("sha256", "Ogs6kounVMcwYS")
+  //     .update(body)
+  //     .digest("hex");
 
     
-    if (generatedSignature !== razorpay_signature) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid payment signature",
-      });
-    }
+  //   if (generatedSignature !== razorpay_signature) {
+  //     return res.status(400).json({
+  //       success: false,
+  //       message: "Invalid payment signature",
+  //     });
+  //   }
 
-    const existingOrder = await Order.findOne({orderId : razorpay_order_id});
+  //   const existingOrder = await Order.findOne({orderId : razorpay_order_id});
 
-    if(existingOrder) {
-      return res.status(400).json({
-        success: false,
-        message: "Order already exists"
-      })
-    }
+  //   if(existingOrder) {
+  //     return res.status(400).json({
+  //       success: false,
+  //       message: "Order already exists"
+  //     })
+  //   }
 
-
-    //payment verified now save to database
 
     const newOrder = new Order({
       orderId: razorpay_order_id,

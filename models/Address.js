@@ -5,9 +5,9 @@ const AddressSchema = new mongoose.Schema ( {
   address : String,
   city: String,
   pincode: String,
-  phone: {
-    type: String,
-  },
+  phone: String,
+   
+
   notes: String
 }, {timestamps : true})
 

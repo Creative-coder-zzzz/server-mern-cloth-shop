@@ -3,7 +3,11 @@ import { Address } from "../../models/Address.js"
 const addAddress = async(req,res) => {
   try{
 
+        console.log("Add address working on frontend")
+
     const {userId, address, city, pincode, phone, notes} = req.body
+    
+
 
     if(!userId || !address || !city || !pincode || !phone || !notes) {
       return res.status(400).json({
@@ -11,6 +15,15 @@ const addAddress = async(req,res) => {
         message: 'Please provide all data'
       })
     }
+
+    const existing = await Address.findOne({ phone });
+if (existing) {
+  return res.status(400).json({
+    success: false,
+    message: "Phone number already exists.",
+  });
+}
+
 
     const newlyCreatedAddress = new Address({
       userId, address, city, pincode, notes, phone

@@ -12,7 +12,7 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'https://vercel.com/creative-coder-zzzzs-projects/the-urban-wave/C8hoG7yxxSAn4hLh1WF4vvv93HXj',
@@ -31,7 +31,8 @@ app.use(
       }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+   allowedHeaders: ['Content-Type', 'Authorization', 'cache-control'],
+
     credentials: true, // if you need to send cookies or authentication headers
   })
 );
