@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 const allowedOrigins = [
   'https://vercel.com/creative-coder-zzzzs-projects/the-urban-wave/C8hoG7yxxSAn4hLh1WF4vvv93HXj',
   'https://the-urban-wave.vercel.app',
-  'http://localhost:5173'// your current front-end URL
+  'http://localhost:5174'// your current front-end URL
 ];
 
 // Enable CORS with the allowed origins
